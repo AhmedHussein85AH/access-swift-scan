@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,19 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Access system theme colors
+				access: {
+					primary: '#1E40AF',
+					secondary: '#3B82F6',
+					accent: '#60A5FA',
+					highlight: '#93C5FD',
+					warning: '#F59E0B',
+					danger: '#EF4444',
+					success: '#10B981',
+					dark: '#1E293B',
+					light: '#F8FAFC',
+					gray: '#64748B',
 				}
 			},
 			borderRadius: {
