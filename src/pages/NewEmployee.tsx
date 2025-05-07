@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Layout from '@/components/Layout';
-import EmployeeForm from '@/components/EmployeeForm';
+import EmployeeForm from '@/components/employee/EmployeeForm';
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from 'react-router-dom';
 import { User } from 'lucide-react';
