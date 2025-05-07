@@ -7,7 +7,9 @@ import {
   QrCode, 
   Search, 
   Upload, 
-  Calendar 
+  Calendar,
+  ChevronRight,
+  FileText
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -19,35 +21,42 @@ const Sidebar = ({ isOpen }: SidebarProps) => {
   
   const navItems = [
     { name: 'Dashboard', path: '/', icon: <QrCode className="w-5 h-5" /> },
-    { name: 'Employees', path: '/employees', icon: <User className="w-5 h-5" /> },
+    { name: 'الصلاحيات', path: '/permissions', icon: <FileText className="w-5 h-5" /> },
+    { name: 'المديرين', path: '/managers', icon: <User className="w-5 h-5" /> },
+    { name: 'إدارة المكونات', path: '/components', icon: <QrCode className="w-5 h-5" /> },
+    { name: 'افراد الامن', path: '/security', icon: <User className="w-5 h-5" /> },
+    { name: 'الموظفين و العمال', path: '/employees', icon: <User className="w-5 h-5" /> },
+    { name: 'التقارير', path: '/reports', icon: <FileText className="w-5 h-5" /> },
     { name: 'Vehicles', path: '/vehicles', icon: <Car className="w-5 h-5" /> },
     { name: 'Scanner', path: '/scanner', icon: <QrCode className="w-5 h-5" /> },
     { name: 'Search', path: '/search', icon: <Search className="w-5 h-5" /> },
-    { name: 'Bulk Upload', path: '/upload', icon: <Upload className="w-5 h-5" /> },
-    { name: 'Expiration', path: '/expiration', icon: <Calendar className="w-5 h-5" /> },
   ];
 
   return (
     <div className={`bg-white shadow-lg ${isOpen ? 'w-64' : 'w-20'} transition-all duration-300 ease-in-out`}>
       <div className="h-16 flex items-center justify-center border-b">
-        <span className={`text-access-primary font-bold ${isOpen ? 'block' : 'hidden'}`}>
-          ACCESS SWIFT
-        </span>
-        {!isOpen && <QrCode className="h-8 w-8 text-access-primary" />}
+        <div className="text-center py-4">
+          <div className="text-sm text-gray-500">APPS & PAGES</div>
+        </div>
       </div>
       <nav className="mt-5 px-2">
         {navItems.map((item) => (
           <Link
             key={item.name}
             to={item.path}
-            className={`flex items-center px-4 py-3 mt-1 text-sm font-medium rounded-md transition-colors duration-200 ${
+            className={`flex items-center justify-between px-4 py-3 mt-1 text-sm font-medium rounded-md transition-colors duration-200 ${
               location.pathname === item.path
-                ? 'bg-access-secondary text-white'
-                : 'text-gray-600 hover:bg-access-highlight hover:text-access-primary'
+                ? 'bg-indigo-500 text-white'
+                : 'text-gray-600 hover:bg-gray-100'
             }`}
           >
-            {item.icon}
-            <span className={`ml-4 ${isOpen ? 'block' : 'hidden'}`}>{item.name}</span>
+            <div className="flex items-center">
+              {item.icon}
+              <span className={`ml-4 ${isOpen ? 'block' : 'hidden'}`}>{item.name}</span>
+            </div>
+            {location.pathname === item.path && (
+              <ChevronRight className="w-4 h-4" />
+            )}
           </Link>
         ))}
       </nav>
