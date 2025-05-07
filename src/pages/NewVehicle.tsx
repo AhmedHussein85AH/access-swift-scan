@@ -14,6 +14,16 @@ const NewVehicle = () => {
     // In a real app, we would call an API to create the vehicle
     console.log("Creating new vehicle:", data);
     
+    // For demo purposes, store in localStorage until database is connected
+    const vehicles = JSON.parse(localStorage.getItem('vehicles') || '[]');
+    const newVehicle = {
+      ...data,
+      id: `VEH-${String(Math.floor(Math.random() * 10000)).padStart(4, '0')}`,
+      status: "Active"
+    };
+    vehicles.push(newVehicle);
+    localStorage.setItem('vehicles', JSON.stringify(vehicles));
+    
     toast({
       title: "Vehicle Registered",
       description: "New vehicle has been registered successfully.",

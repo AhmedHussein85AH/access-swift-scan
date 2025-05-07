@@ -14,6 +14,16 @@ const NewEmployee = () => {
     // In a real app, we would call an API to create the employee
     console.log("Creating new employee:", data);
     
+    // For demo purposes, store in localStorage until database is connected
+    const employees = JSON.parse(localStorage.getItem('employees') || '[]');
+    const newEmployee = {
+      ...data,
+      id: `EMP-${String(Math.floor(Math.random() * 10000)).padStart(4, '0')}`,
+      status: "Active"
+    };
+    employees.push(newEmployee);
+    localStorage.setItem('employees', JSON.stringify(employees));
+    
     toast({
       title: "Employee Registered",
       description: "New employee has been registered successfully.",

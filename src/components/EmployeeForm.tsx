@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Form,
@@ -16,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Upload } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -36,6 +36,7 @@ interface EmployeeFormProps {
 const EmployeeForm = ({ onSubmit, initialData, isEditing = false }: EmployeeFormProps) => {
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const navigate = useNavigate();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -66,7 +67,15 @@ const EmployeeForm = ({ onSubmit, initialData, isEditing = false }: EmployeeForm
   };
 
   const handleFormSubmit = (values: z.infer<typeof formSchema>) => {
-    onSubmit(values);
+    const submissionData = {
+      ...values,
+      photo: photoPreview
+    };
+    onSubmit(submissionData);
+  };
+
+  const handleCancel = () => {
+    navigate('/employees');
   };
 
   return (
@@ -211,7 +220,7 @@ const EmployeeForm = ({ onSubmit, initialData, isEditing = false }: EmployeeForm
             </div>
             
             <CardFooter className="px-0 flex justify-end gap-2">
-              <Button type="button" variant="outline">Cancel</Button>
+              <Button type="button" variant="outline" onClick={handleCancel}>Cancel</Button>
               <Button type="submit" className="bg-access-primary hover:bg-access-secondary">
                 {isEditing ? "Update Employee" : "Register Employee"}
               </Button>
